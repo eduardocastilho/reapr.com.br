@@ -1,0 +1,4 @@
+{# Marca da foice (versão B). Cores via CSS: .mark-blade, .mark-handle, .mark-cursor. #}
+{% macro mark(size=34) %}<svg class="mark" width="{{ size }}" height="{{ size }}" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path class="mark-blade" d="M41 8 C28 3 13 9 7 22 C17 15 28 14 39 18 Z"/><line class="mark-handle" x1="41" y1="9" x2="24" y2="54"/><rect class="mark-cursor" x="32" y="51" width="20" height="5" rx="1"/></svg>{% endmacro %}
+
+{% macro signature(size=34) %}<span class="signature">{{ mark(size) }}<span class="signature-word">REAPR <span class="signature-labs">Labs</span></span></span>{% endmacro %}

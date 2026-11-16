@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% from "_cards.html" import case_card, writing_rows %}
+{% block main %}
+<section class="hero">
+  <div class="wrap hero-grid{% if site.status_panel %} with-panel{% endif %}">
+    <div class="hero-text">
+      <p class="eyebrow">Site reliability · Observability · Automation</p>
+      <h1 class="display">Reliable systems,<br><span class="accent">measured in public.</span></h1>
+      <p class="lead">REAPR Labs is the engineering lab of Eduardo Castilho, a monitoring and observability analyst building toward Site Reliability Engineering. The goal for every project here: an SLO, a dashboard and an honest write-up.</p>
+      <p class="actions">
+        <a class="btn btn-primary" href="{{ base }}/work/">View the work</a>
+        {% if has_writing %}<a class="btn btn-secondary" href="{{ base }}/writing/">Read the post-mortems</a>{% else %}<a class="btn btn-secondary" href="{{ base }}/about/">About me</a>{% endif %}
+      </p>
+    </div>
+    {% if site.status_panel %}
+    <aside id="status" class="panel status" aria-label="Live status of this site">
+      <div class="panel-top">
+        <span class="mono-label">THIS SITE · LIVE STATUS</span>
+        <span class="status-ok"><span class="dot" aria-hidden="true"></span>{{ site.status.state }}</span>
+      </div>
+      <div class="tiles">
+        <div class="tile"><p class="tile-label">Uptime · 30d</p><p class="tile-value">{{ site.status.uptime_30d }}</p></div>
+        <div class="tile"><p class="tile-label">SLO target</p><p class="tile-value">{{ site.status.slo }}</p></div>
+        <div class="tile"><p class="tile-label">Error budget left</p><p class="tile-value accent">{{ site.status.budget_left }}</p></div>
+        <div class="tile"><p class="tile-label">p95 response</p><p class="tile-value">{{ site.status.p95 }}</p></div>
+      </div>
+      {% if deploy %}<p class="panel-foot">last deploy · <a href="{{ deploy.url }}" rel="noopener">{{ deploy.sha }}</a> · via GitHub Actions</p>{% endif %}
+    </aside>
+    {% endif %}
+  </div>
+</section>
+
+<div class="wrap sections">
+  {% if featured %}
+  <section id="work" class="section">
+    <div class="section-head">
+      <h2>Featured work</h2>
+      {% if site.github %}<a class="mono-link" href="{{ site.github }}" rel="noopener">All repositories <span aria-hidden="true">↗</span></a>{% endif %}
+    </div>
+    <div class="cards">
+      {% for e in featured %}{{ case_card(e) }}{% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="section">
+    <h2>How I work</h2>
+    <div class="principles">
+      <div class="principle"><h3>Measure first</h3><p>No opinion about reliability without an SLI behind it.</p></div>
+      <div class="principle"><h3>Automate the second time</h3><p>Done by hand twice means it becomes code.</p></div>
+      <div class="principle"><h3>Alerts must mean action</h3><p>An alert nobody acts on is a bug to fix.</p></div>
+      <div class="principle"><h3>Write it down</h3><p>Runbooks and blameless post-mortems, in public.</p></div>
+    </div>
+  </section>
+
+  {% if writing %}
+  <section id="writing" class="section">
+    <div class="section-head">
+      <h2>Post-mortems and notes</h2>
+      <a class="mono-link" href="{{ base }}/writing/">All posts <span aria-hidden="true">→</span></a>
+    </div>
+    {{ writing_rows(writing) }}
+  </section>
+  {% endif %}
+
+  <section id="about" class="about-block">
+    <div class="about-text">
+      <p class="eyebrow">About</p>
+      <h2>Eduardo Castilho</h2>
+      <p>Monitoring analyst on the Monitoring Tools team of an MSSP in Brazil. I keep telemetry pipelines healthy, tune alerts and automate with Python. Moving toward SRE, open to remote roles with teams in Latin America and abroad.</p>
+      <p><a href="{{ base }}/about/">More about me and how this lab works <span aria-hidden="true">→</span></a></p>
+    </div>
+    <div class="about-links">
+      {% if site.linkedin %}<a class="link-block" href="{{ site.linkedin }}" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>{% endif %}
+      {% if site.github %}<a class="link-block" href="{{ site.github }}" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>{% endif %}
+      {% if site.resume_pdf %}<a class="link-block link-block-primary" href="{{ base }}/static/{{ site.resume_pdf }}">Download résumé (PDF)</a>{% endif %}
+    </div>
+  </section>
+</div>
+{% endblock %}

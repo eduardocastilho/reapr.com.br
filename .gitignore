@@ -1,0 +1,6 @@
+dist/
+__pycache__/
+.venv/
+
+# Arquivos locais, fora do repositório público
+rodar-local.bat

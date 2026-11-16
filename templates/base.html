@@ -1,0 +1,52 @@
+{% import "_mark.html" as brand %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ site.title }} · {{ site.tagline }}{% endblock %}</title>
+<meta name="description" content="{% block description %}{{ site.description }}{% endblock %}">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#071012">
+<link rel="icon" href="{{ base }}/static/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{{ base }}/static/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{{ base }}/static/apple-touch-icon.png">
+<link rel="alternate" type="application/atom+xml" title="{{ site.title }} · Post-mortems and notes" href="{{ base }}/feed.xml">
+<link rel="preload" href="{{ base }}/static/fonts/Inter-Regular.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="{{ base }}/static/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="{{ base }}/" aria-label="REAPR Labs, home">{{ brand.signature(34) }}</a>
+    <nav class="nav" aria-label="Main">
+      <a href="{{ base }}/work/"{% if nav == 'work' %} aria-current="page"{% endif %}>Work</a>
+      <a href="{{ base }}/writing/"{% if nav == 'writing' %} aria-current="page"{% endif %}>Post-mortems</a>
+      {% if site.status_panel %}<a href="{{ base }}/#status">Status</a>{% endif %}
+      <a href="{{ base }}/about/"{% if nav == 'about' %} aria-current="page"{% endif %}>About</a>
+      {% if site.resume_pdf %}<a class="btn btn-outline" href="{{ base }}/static/{{ site.resume_pdf }}">Résumé <span aria-hidden="true">↗</span></a>{% endif %}
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+{% block main %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    {{ brand.signature(28) }}
+    <p class="footer-statement">Independent engineering lab · self-built environments, public data · views are my own</p>
+    <p class="footer-meta">
+      {% if deploy %}deployed by CI · <a href="{{ deploy.url }}" rel="noopener">{{ deploy.sha }}</a>{% else %}local build{% endif %}
+      {% if site.github %} · <a href="{{ site.github }}" rel="noopener">GitHub</a>{% endif %}
+      {% if site.linkedin %} · <a href="{{ site.linkedin }}" rel="noopener">LinkedIn</a>{% endif %}
+      · <a href="{{ base }}/feed.xml">Feed</a>
+    </p>
+  </div>
+</footer>
+</body>
+</html>

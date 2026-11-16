@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ e.meta.title }} · {{ site.title }}{% endblock %}
+{% block description %}{{ e.meta.get('summary', site.description) }}{% endblock %}
+{% block main %}
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">{{ e.meta.get('eyebrow', e.meta.title) }}</p>
+    <h1>{{ e.meta.get('heading', e.meta.title) }}</h1>
+    {% if e.meta.get('summary') %}<p class="lead">{{ e.meta.summary }}</p>{% endif %}
+  </div>
+</section>
+<div class="wrap entry-body">
+  <div class="prose">{{ e.body_html | safe }}</div>
+  {% if e.slug == 'about' %}
+  <p class="about-links about-links-row">
+    {% if site.linkedin %}<a class="link-block" href="{{ site.linkedin }}" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>{% endif %}
+    {% if site.github %}<a class="link-block" href="{{ site.github }}" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>{% endif %}
+    {% if site.resume_pdf %}<a class="link-block link-block-primary" href="{{ base }}/static/{{ site.resume_pdf }}">Download résumé (PDF)</a>{% endif %}
+  </p>
+  {% endif %}
+</div>
+{% endblock %}

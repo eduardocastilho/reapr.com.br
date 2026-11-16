@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Not found · {{ site.title }}{% endblock %}
+{% block main %}
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">HTTP 404</p>
+    <h1>This page is not in the error budget.</h1>
+    <p class="lead">It may have moved. Start from the <a href="{{ base }}/">home page</a> or the <a href="{{ base }}/work/">work</a>.</p>
+  </div>
+</section>
+{% endblock %}

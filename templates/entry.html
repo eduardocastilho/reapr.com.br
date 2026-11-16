@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{{ e.meta.title }} · {{ site.title }}{% endblock %}
+{% block description %}{{ e.meta.get('summary', site.description) }}{% endblock %}
+{% block main %}
+<article class="entry">
+  <header class="page-head">
+    <div class="wrap">
+      <a class="back mono-link" href="{{ base }}/{{ e.section }}/"><span aria-hidden="true">←</span> {% if e.section == 'work' %}Work{% else %}Post-mortems and notes{% endif %}</a>
+      <p class="eyebrow">
+        {% if e.section == 'work' %}Case {{ '%02d' % e.meta.case }} <span class="badge badge-{{ e.meta.status | replace(' ', '-') }}">{{ e.meta.status }}</span>{% else %}{{ e.meta.kind_label }}{% endif %}
+        {% if e.meta.get('draft') %}<span class="badge badge-draft">draft</span>{% endif %}
+      </p>
+      <h1>{{ e.meta.title }}</h1>
+      {% if e.meta.get('summary') %}<p class="lead">{{ e.meta.summary }}</p>{% endif %}
+      <dl class="facts">
+        <div><dt>{% if e.section == 'work' %}Started{% else %}Published{% endif %}</dt><dd>{{ e.date | isodate }}</dd></div>
+        {% if e.meta.get('updated') %}<div><dt>Updated</dt><dd>{{ e.meta.updated }}</dd></div>{% endif %}
+        {% if e.section == 'work' and e.meta.stack %}<div><dt>Stack</dt><dd>{{ e.meta.stack | join(' · ') }}</dd></div>{% endif %}
+        {% if e.meta.get('repo') %}<div><dt>Source</dt><dd><a href="{{ e.meta.repo }}" rel="noopener">{{ e.meta.repo | replace('https://github.com/', '') }}</a></dd></div>{% endif %}
+      </dl>
+    </div>
+  </header>
+
+  <div class="wrap entry-body">
+    {% if e.section == 'work' %}
+    <dl class="par par-wide">
+      <dt>Problem</dt><dd>{{ e.meta.problem }}</dd>
+      <dt>Approach</dt><dd>{{ e.meta.approach }}</dd>
+      {% if e.meta.result %}<dt>Result</dt><dd>{{ e.meta.result }}</dd>{% endif %}
+    </dl>
+    {% endif %}
+    {% if e.toc_html and '<li>' in e.toc_html %}
+    <nav class="contents" aria-label="Contents">
+      <p class="mono-label">Contents</p>
+      {{ e.toc_html | safe }}
+    </nav>
+    {% endif %}
+    <div class="prose">{{ e.body_html | safe }}</div>
+  </div>
+</article>
+{% endblock %}

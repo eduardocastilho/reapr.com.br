@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% from "_cards.html" import case_card, writing_rows %}
+{% block title %}{{ heading }} · {{ site.title }}{% endblock %}
+{% block main %}
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">{{ kind }}</p>
+    <h1>{{ heading }}</h1>
+    <p class="lead">{{ intro }}</p>
+  </div>
+</section>
+<div class="wrap page-body">
+  {% if entries %}
+    {% if kind == 'work' %}
+    <div class="cards">{% for e in entries %}{{ case_card(e) }}{% endfor %}</div>
+    {% else %}
+    {{ writing_rows(entries) }}
+    {% endif %}
+  {% else %}
+  <p class="empty">{{ empty }}</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+# Configuração do site da REAPR Labs
+title: REAPR Labs
+tagline: Reliable systems, measured in public.
+description: Engineering lab of Eduardo Castilho. Site reliability, observability and automation projects, documented in public.
+
+# URL pública final, sem barra no fim. Usada em links canônicos e no feed.
+url: https://reapr.com.br
+
+# Caminho base. Deixe "" para domínio próprio.
+base_path: ""
+
+author: Eduardo Castilho
+
+# Links. Deixe vazio ("") para esconder.
+github: https://github.com/eduardocastilho
+linkedin: ""
+email: ""
+repo: https://github.com/eduardocastilho/reapr.com.br
+
+# Currículo em PDF dentro de static/ (ex.: "resume-eduardo-castilho.pdf").
+# Vazio esconde o botão "Résumé" e o link do About.
+resume_pdf: ""
+
+# Painel "This site · live status". Só ligue quando houver dados reais do monitoramento.
+status_panel: false

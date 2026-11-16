@@ -1,0 +1,24 @@
+{# Card de caso (Problem → Approach → Result) e linha de texto. #}
+{% macro case_card(e) %}
+<article class="card case">
+  <div class="card-top">
+    <span class="mono-label">CASE {{ '%02d' % e.meta.case }}</span>
+    <span class="badge badge-{{ e.meta.status | replace(' ', '-') }}">{{ e.meta.status }}</span>
+  </div>
+  <h3><a href="{{ e.url }}">{{ e.meta.title }}</a></h3>
+  <dl class="par">
+    <dt>Problem</dt><dd>{{ e.meta.problem }}</dd>
+    <dt>Approach</dt><dd>{{ e.meta.approach }}</dd>
+    {% if e.meta.result %}<dt>Result</dt><dd>{{ e.meta.result }}</dd>{% endif %}
+  </dl>
+  {% if e.meta.stack %}<p class="stack">{{ e.meta.stack | join(' · ') }}</p>{% endif %}
+</article>
+{% endmacro %}
+
+{% macro writing_rows(entries) %}
+<ul class="rows">
+  {% for e in entries %}
+  <li><a href="{{ e.url }}">{{ e.meta.title }}</a><span class="row-meta">{{ e.date | isodate }} · {{ e.meta.kind_label | lower }}</span></li>
+  {% endfor %}
+</ul>
+{% endmacro %}
